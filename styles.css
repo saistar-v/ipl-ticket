@@ -1,0 +1,245 @@
+/* ==========================================================
+   IPL BOX OFFICE - PRO ENHANCEMENTS & MODERN STADIUM THEME
+   ========================================================== */
+
+/* 1. Global Refinements & Custom Scrollbars */
+:root {
+    --primary: #0b1120;
+    --secondary: #1e293b;
+    --accent: #f59e0b;
+    --accent-glow: rgba(245, 158, 11, 0.4);
+    --blue-glow: #3b82f6;
+    --seat-avail: #1e293b;
+    --seat-selected: #10b981;
+    --seat-booked: #e11d48;
+    --pitch-texture: #064e3b;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+}
+
+body {
+    background: radial-gradient(circle at top center, #1e3a8a33 0%, var(--primary) 70%);
+    min-height: 100vh;
+    letter-spacing: 0.2px;
+}
+
+/* Sleek custom scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0b1120;
+}
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* 2. Header & Brand Polish */
+header {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+    text-shadow: 0 0 16px var(--accent-glow);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease;
+}
+.logo:hover {
+    transform: scale(1.03);
+}
+
+/* 3. Match Selector Cards Glassmorphism */
+.match-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(59, 130, 246, 0.6);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+}
+
+.match-card.active {
+    background: linear-gradient(145deg, #1e3a8a44, #1e293b);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+}
+
+/* 4. Stadium Workspace, Pitch & Floodlight Effects */
+.stadium-wrapper {
+    background: linear-gradient(180deg, #162032 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floodlight glow from top */
+.stadium-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    height: 100px;
+    background: radial-gradient(ellipse, rgba(59, 130, 246, 0.35) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.pitch-container {
+    background: repeating-linear-gradient(
+        90deg,
+        #065f46,
+        #065f46 25px,
+        #047857 25px,
+        #047857 50px
+    );
+    border: 2px dashed rgba(110, 231, 183, 0.6);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 20px rgba(6, 95, 70, 0.4);
+}
+
+/* 5. Stadium Seating Geometry & Realistic Perspective */
+.seat-row {
+    perspective: 500px;
+    margin-bottom: 2px;
+}
+
+.seat {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Seat Headrest / Cushion 3D Effect */
+.seat::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    right: 3px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+}
+
+.seat:hover:not(.booked) {
+    transform: translateY(-4px) scale(1.15);
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.6);
+}
+
+.seat.selected {
+    animation: seatPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes seatPop {
+    0% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+.seat.booked {
+    filter: grayscale(40%);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* 6. Checkout Summary Panel Polish */
+.summary-card {
+    background: linear-gradient(160deg, #1e293b, #111827);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.seat-tag {
+    animation: fadeIn 0.2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(110, 231, 183, 0.3);
+}
+
+.btn-checkout {
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+.btn-checkout:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+}
+
+/* 7. Official E-Ticket Pass Modal Aesthetics */
+.e-ticket {
+    background: radial-gradient(circle at 100% 0%, #f1f5f9 0%, #ffffff 100%);
+    position: relative;
+}
+
+/* Notched cutout edges on ticket pass */
+.e-ticket::before, .e-ticket::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 50%;
+    top: 55%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.e-ticket::before { left: -12px; }
+.e-ticket::after { right: -12px; }
+
+.e-ticket-header {
+    background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+    position: relative;
+}
+
+.ticket-item-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ticket-item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* 8. Media Queries for Mobile Screens */
+@media (max-width: 640px) {
+    .header-content {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .nav-tabs {
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+    
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .seat {
+        width: 22px;
+        height: 22px;
+        font-size: 0.6rem;
+    }
+
+    .row-label {
+        font-size: 0.7rem;
+        width: 16px;
+    }
+
+    .aisle-gap {
+        width: 10px;
+    }
+}
